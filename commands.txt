@@ -1,0 +1,23 @@
+source install/setup.bash
+
+colcon build --symlink-install
+
+	ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro ~/dev_ws/src/example_robot.urdf.xacro)"
+
+
+
+	check_urdf src/example_robot.urdf.xacro 
+	xacro example_robot.urdf.xacro > test_robot.urdf
+	check_urdf src/example_robot.urdf.xacro 
+
+
+ros2 run robot_state_publisher robot_state_publisher test_robot.urdf
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+			kann dann gestartet werden
+
+
+
+LC_NUMERIC="en_US.UTF-8"			vorher eingeben, damit zylinder auch angezeigt wird
+
+ros2 launch my_package rsp_sim.launch.py			öffnet auch gazebo mit
+
